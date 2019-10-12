@@ -4,33 +4,33 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
-  ## Запишем матрицу
+  ## Set the matrix
   set <- function(y){
     x <<- y
     inv <<- NULL
   }
-  ## Вызовем матрицу
+  ## Get the matrix
   get <- function() x
-  ## Метод записи обратной матрицы
+  ## Method to set the inverse matrix
   setInverse <- function(solveMatrix) inv <<- solveMatrix
-  ## Способ вызова обратной матрицы
+  ## Method to get the inverse matrix
   getInverse <- function() inv
-  ## Отобразим список методов
+  ## Showing the list of methods
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
 
 
 cacheSolve <- function(x, ...) {
-  ## Возвращает матрицу, обратную x
+  ## Gets the matrix, inverse to x
   inv <- x$getInverse()
-  ## Убираем инверсию если она есть
+  ## Getting off the inversion
   if(!is.null(inv)){
     message("Getting cached data.")
     return(inv)
   }
-  ## Вызовем матрицу
+  ## Get the matrix
   data <- x$get()
-  ## Используем матричное умножение
+  ## Using the matrix multiplication
   inv <- solve(data)
   x$setInverse(inv)
   inv      
